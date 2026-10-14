@@ -24,7 +24,7 @@ jobs:
 
       # run tests!
       - run: npm run test
-      - rin: npm audit || true
+      - run: npm audit || true
       - run: npm run build
 
 workflows:
