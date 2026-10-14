@@ -200,16 +200,16 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
   },
   animBoeufFromage: {
     "&:hover $image": {
-      animation: "food-sizzle 0.2s ease-in-out infinite"
+      animation: "food-sizzle 0.5s ease-in-out infinite"
     },
     "&:hover $cheeseDrip": {
-      animation: "food-cheese-drip 1.8s ease-in-out"
+      animation: "food-cheese-drip 2.2s ease-in-out"
     },
     "&:hover $steam1": {
-      animation: "food-steam-rise 1.5s ease-out infinite"
+      animation: "food-steam-rise 2s ease-out infinite"
     },
     "&:hover $steam2": {
-      animation: "food-steam-rise 1.5s ease-out 0.5s infinite"
+      animation: "food-steam-rise 2s ease-out 0.7s infinite"
     }
   },
   misoTopping: {
@@ -269,8 +269,8 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
     width: 10,
     height: 20,
     borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
-    background: "rgba(255,255,255,0.4)",
-    filter: "blur(3px)",
+    background: "rgba(255,255,255,0.25)",
+    filter: "blur(4px)",
     opacity: 0,
     pointerEvents: "none"
   },
@@ -281,8 +281,8 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
     width: 8,
     height: 16,
     borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
-    background: "rgba(255,255,255,0.35)",
-    filter: "blur(2px)",
+    background: "rgba(255,255,255,0.2)",
+    filter: "blur(3px)",
     opacity: 0,
     pointerEvents: "none"
   },
