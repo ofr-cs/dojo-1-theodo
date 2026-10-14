@@ -12,7 +12,27 @@ type ClassNames =
   | "value"
   | "button"
   | "input"
-  | "image";
+  | "imageWrapper"
+  | "image"
+  | "animSushi"
+  | "animMaki"
+  | "animCalifornia"
+  | "animMiso"
+  | "animViande"
+  | "animBoeufFromage"
+  | "misoTopping"
+  | "misoRipple"
+  | "meatPiece"
+  | "cheeseDrip";
+
+const FOOD_ANIMATIONS: Record<string, ClassNames> = {
+  Sushi: "animSushi",
+  Maki: "animMaki",
+  California: "animCalifornia",
+  "Soupe Miso": "animMiso",
+  Viande: "animViande",
+  "Boeuf Fromage": "animBoeufFromage",
+};
 interface OwnProps {
   classes: Record<ClassNames, string>;
   imgSrc: string;
@@ -39,9 +59,24 @@ export const FoodTile: React.FC<Props> = (props: Props) => {
     handleChange(Number(event.target.value))();
   };
 
+  const animClass = FOOD_ANIMATIONS[name];
+  const wrapperClass = animClass
+    ? `${classes.imageWrapper} ${classes[animClass]}`
+    : classes.imageWrapper;
+
   return (
     <div className={classes.container}>
-      <img src={imgSrc} alt={name} className={classes.image} />
+      <div className={wrapperClass}>
+        <img src={imgSrc} alt={name} className={classes.image} />
+        {name === "Soupe Miso" && (
+          <>
+            <div className={classes.misoTopping} />
+            <div className={classes.misoRipple} />
+          </>
+        )}
+        {name === "Viande" && <div className={classes.meatPiece} />}
+        {name === "Boeuf Fromage" && <div className={classes.cheeseDrip} />}
+      </div>
       <div className={classes.nameContainer}>
         <span className={classes.name}>{name}</span>
 
@@ -113,8 +148,104 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
       boxShadow: "0px 1px 4px #00000029"
     }
   },
+  imageWrapper: {
+    position: "relative",
+    display: "inline-block",
+    cursor: "pointer",
+    transition: "transform 0.2s ease",
+    "&:hover": {
+      transform: "scale(1.06)"
+    }
+  },
   image: {
-    height: 100
+    height: 100,
+    display: "block",
+    transformOrigin: "center"
+  },
+  animSushi: {
+    "&:hover $image": {
+      animation: "food-sushi-flip 0.7s ease"
+    }
+  },
+  animMaki: {
+    "&:hover $image": {
+      animation: "food-maki-spin 1.5s linear infinite"
+    }
+  },
+  animCalifornia: {
+    "&:hover $image": {
+      animation: "food-california-wave 1.2s ease-in-out infinite"
+    }
+  },
+  animMiso: {
+    "&:hover $misoTopping": {
+      animation: "food-miso-dive 1.2s ease-in forwards"
+    },
+    "&:hover $misoRipple": {
+      animation: "food-miso-ripple 0.8s ease-out 0.5s"
+    }
+  },
+  animViande: {
+    "&:hover $meatPiece": {
+      animation: "food-viande-fall 1s ease-in forwards"
+    }
+  },
+  animBoeufFromage: {
+    "&:hover $image": {
+      animation: "food-sizzle 0.25s ease-in-out infinite"
+    },
+    "&:hover $cheeseDrip": {
+      animation: "food-cheese-drip 1.5s ease-in-out"
+    }
+  },
+  misoTopping: {
+    position: "absolute",
+    top: -8,
+    left: "50%",
+    width: 16,
+    height: 16,
+    marginLeft: -8,
+    borderRadius: 4,
+    background: "linear-gradient(135deg, #FFFDE7 0%, #FFF9C4 100%)",
+    boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+    opacity: 0,
+    pointerEvents: "none",
+    zIndex: 2
+  },
+  misoRipple: {
+    position: "absolute",
+    top: 58,
+    left: "50%",
+    width: 36,
+    height: 10,
+    marginLeft: -18,
+    borderRadius: "50%",
+    border: "2px solid rgba(255,255,255,0.6)",
+    opacity: 0,
+    pointerEvents: "none"
+  },
+  meatPiece: {
+    position: "absolute",
+    top: "30%",
+    right: "22%",
+    width: 16,
+    height: 12,
+    borderRadius: 3,
+    background: "linear-gradient(135deg, #8B4513 0%, #A0522D 100%)",
+    boxShadow: "0 2px 4px rgba(0,0,0,0.3)",
+    opacity: 0,
+    pointerEvents: "none"
+  },
+  cheeseDrip: {
+    position: "absolute",
+    top: "40%",
+    left: "50%",
+    width: 6,
+    marginLeft: -3,
+    borderRadius: "0 0 3px 3px",
+    background: "linear-gradient(180deg, #FFD54F 0%, #FF8F00 100%)",
+    opacity: 0,
+    pointerEvents: "none"
   },
   input: {
     border: "none",
