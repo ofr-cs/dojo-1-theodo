@@ -85,12 +85,33 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
   controls: {
     display: "flex",
     alignItems: "center",
-    "& > svg": {
-      color: "grey"
-    }
+    gap: 6
   },
   button: {
-    color: "grey"
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 32,
+    height: 32,
+    borderRadius: "50%",
+    background:
+      "transparent linear-gradient(101deg, #F78E0D 0%, #F9C41C 100%) 0% 0% no-repeat padding-box",
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+    lineHeight: 1,
+    cursor: "pointer",
+    userSelect: "none",
+    boxShadow: "0px 2px 8px #00000029",
+    transition: "transform 0.15s ease, box-shadow 0.15s ease",
+    "&:hover": {
+      transform: "scale(1.15)",
+      boxShadow: "0px 4px 16px #F78E0D66"
+    },
+    "&:active": {
+      transform: "scale(0.92)",
+      boxShadow: "0px 1px 4px #00000029"
+    }
   },
   image: {
     height: 100
@@ -99,8 +120,14 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
     border: "none",
     outline: "none",
     mozAppearance: "textfield",
-    width: 30,
-    textAlign: "center"
+    width: 36,
+    height: 32,
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#333",
+    background: "#f5f5f5",
+    borderRadius: 8
   },
   value: {
     marginLeft: theme.spacing(0.5),
