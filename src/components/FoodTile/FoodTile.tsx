@@ -23,7 +23,9 @@ type ClassNames =
   | "misoTopping"
   | "misoRipple"
   | "meatPiece"
-  | "cheeseDrip";
+  | "cheeseDrip"
+  | "steam1"
+  | "steam2";
 
 const FOOD_ANIMATIONS: Record<string, ClassNames> = {
   Sushi: "animSushi",
@@ -75,7 +77,13 @@ export const FoodTile: React.FC<Props> = (props: Props) => {
           </>
         )}
         {name === "Viande" && <div className={classes.meatPiece} />}
-        {name === "Boeuf Fromage" && <div className={classes.cheeseDrip} />}
+        {name === "Boeuf Fromage" && (
+          <>
+            <div className={classes.cheeseDrip} />
+            <div className={classes.steam1} />
+            <div className={classes.steam2} />
+          </>
+        )}
       </div>
       <div className={classes.nameContainer}>
         <span className={classes.name}>{name}</span>
@@ -169,7 +177,7 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
   },
   animMaki: {
     "&:hover $image": {
-      animation: "food-maki-spin 1.5s linear infinite"
+      animation: "food-maki-hop 1s ease-in-out infinite"
     }
   },
   animCalifornia: {
@@ -192,10 +200,16 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
   },
   animBoeufFromage: {
     "&:hover $image": {
-      animation: "food-sizzle 0.25s ease-in-out infinite"
+      animation: "food-sizzle 0.2s ease-in-out infinite"
     },
     "&:hover $cheeseDrip": {
-      animation: "food-cheese-drip 1.5s ease-in-out"
+      animation: "food-cheese-drip 1.8s ease-in-out"
+    },
+    "&:hover $steam1": {
+      animation: "food-steam-rise 1.5s ease-out infinite"
+    },
+    "&:hover $steam2": {
+      animation: "food-steam-rise 1.5s ease-out 0.5s infinite"
     }
   },
   misoTopping: {
@@ -214,11 +228,12 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
   },
   misoRipple: {
     position: "absolute",
-    top: 58,
+    top: 40,
     left: "50%",
     width: 36,
     height: 10,
     marginLeft: -18,
+    marginTop: -5,
     borderRadius: "50%",
     border: "2px solid rgba(255,255,255,0.6)",
     opacity: 0,
@@ -240,10 +255,34 @@ const styles = (theme: CustomTheme): Record<ClassNames, CSSProperties> => ({
     position: "absolute",
     top: "40%",
     left: "50%",
-    width: 6,
-    marginLeft: -3,
-    borderRadius: "0 0 3px 3px",
+    width: 8,
+    marginLeft: -4,
+    borderRadius: "0 0 4px 4px",
     background: "linear-gradient(180deg, #FFD54F 0%, #FF8F00 100%)",
+    opacity: 0,
+    pointerEvents: "none"
+  },
+  steam1: {
+    position: "absolute",
+    top: "15%",
+    left: "30%",
+    width: 10,
+    height: 20,
+    borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
+    background: "rgba(255,255,255,0.4)",
+    filter: "blur(3px)",
+    opacity: 0,
+    pointerEvents: "none"
+  },
+  steam2: {
+    position: "absolute",
+    top: "20%",
+    left: "55%",
+    width: 8,
+    height: 16,
+    borderRadius: "50% 50% 50% 50% / 60% 60% 40% 40%",
+    background: "rgba(255,255,255,0.35)",
+    filter: "blur(2px)",
     opacity: 0,
     pointerEvents: "none"
   },
